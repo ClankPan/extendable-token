@@ -11,14 +11,22 @@ module ExtArchive = {
   
   public type Date = Nat64;
   public type TransactionId = Nat;
+  public type MintingEvent = {
+    minter : User;
+    to : User;
+    token : TokenIdentifier;
+    amount : Balance;
+    memo : Memo;
+  };
   public type Transaction = {
     txid : TransactionId;
-    request : ExtCore.TransferRequest;
+    data : { #ExtCore.TransferRequest; #MintingEvent; };
     date : Date;
   };
 
+
   public type TransactionRequest = {
-    query : {
+    filter : {
       #txid : TransactionId;
       #user : ExtCore.User;
       #date : (Date, Date); //from - to
