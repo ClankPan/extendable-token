@@ -12,15 +12,15 @@ module ExtArchive = {
   public type Date = Nat64;
   public type TransactionId = Nat;
   public type MintingEvent = {
-    minter : User;
-    to : User;
-    token : TokenIdentifier;
-    amount : Balance;
-    memo : Memo;
+    minter : ExtCore.User;
+    to : ExtCore.User;
+    token : ExtCore.TokenIdentifier;
+    amount : ExtCore.Balance;
+    memo : ExtCore.Memo;
   };
   public type Transaction = {
     txid : TransactionId;
-    data : { #ExtCore.TransferRequest; #MintingEvent; };
+    data : { #transfer: ExtCore.TransferRequest; #mint: MintingEvent; };
     date : Date;
   };
 
@@ -32,12 +32,11 @@ module ExtArchive = {
       #date : (Date, Date); //from - to
       #page : (Nat, Nat); // all per page - page
       #all;
-    }
-    token : TokenIdentifier;
+    };
+    token : ExtCore.TokenIdentifier;
   };
   
   public type ValidActor = actor {
-  add : shared (request : TransferRequest) -> TransactionId;
-  transactions : query (request : TransactionsRequest) -> async Result.Result<[Transaction], ExtCore.CommonError>;
+    transactions : query (request : TransactionRequest) -> async Result.Result<[Transaction], ExtCore.CommonError>;
   };
 };
