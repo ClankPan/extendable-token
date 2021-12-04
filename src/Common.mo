@@ -10,13 +10,13 @@ module ExtCommon = {
       name : Text;
       symbol : Text;
       decimals : Nat8;
-      metadata : ?Blob;
+      metadata : ?Text;
     };
     #nonfungible : {
-      metadata : ?Blob;
+      metadata : ?Text;
     };
   };
-  
+
   public type Service = actor {
     metadata: query (token : ExtCore.TokenIdentifier) -> async Result.Result<Metadata, ExtCore.CommonError>;
 
