@@ -13,7 +13,7 @@ module ExtCommon = {
       metadata : ?Text;
     };
     #nonfungible : {
-      metadata : Text;
+      metadata : ?Text;
     };
   };
 
